@@ -1,12 +1,12 @@
 Summary:	libgksu library
 Summary(pl):	Biblioteka libgksu
 Name:		libgksu
-Version:	1.2.4
+Version:	1.2.5a
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/libgksu1.2/%{name}1.2-%{version}.tar.gz
-# Source0-md5:	7a7449d649ea7012c958e4372a9db88a
+# Source0-md5:	9abc77957b1de93fe58b70ebb626d674
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	glib2-devel
 BuildRequires:	gtk-doc >= 1.0
