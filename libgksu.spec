@@ -10,6 +10,7 @@ Source0:	http://people.debian.org/~kov/gksu/libgksu1.2/%{name}1.2-%{version}.tar
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	glib2-devel
 BuildRequires:	gtk-doc >= 1.0
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
