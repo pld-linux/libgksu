@@ -64,11 +64,13 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%gconf_schema_install gksu.schema
+%post
+/sbin/ldconfig
+%gconf_schema_install gksu.schemas
 
-%postun	-p /sbin/ldconfig
-%gconf_schema_uninstall gksu.schema
+%postun
+/sbin/ldconfig
+%gconf_schema_uninstall gksu.schemas
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
