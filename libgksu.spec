@@ -1,12 +1,12 @@
 Summary:	libgksu library
 Summary(pl):	Biblioteka libgksu
 Name:		libgksu
-Version:	1.3.8
-Release:	1
+Version:	1.9.8
+Release:	0.1
 License:	LGPL
 Group:		Libraries
-Source0:	http://people.debian.org/~kov/gksu/libgksu1.2/%{name}1.2-%{version}.tar.gz
-# Source0-md5:	5c0ffa259534829cb4c5772e694282e3
+Source0:	http://people.debian.org/~kov/gksu/libgksu2/%{name}-%{version}.tar.gz
+# Source0-md5:	5c11e93bfb599a4d6b785f73167f9243
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	glib2-devel >= 1:2.11.3
 BuildRequires:	gtk-doc >= 1.6
@@ -45,7 +45,7 @@ Static libgksu library.
 Statyczna biblioteka libgksu.
 
 %prep
-%setup -q -n %{name}1.2-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 %configure \
@@ -59,20 +59,29 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%find_lang %{name}1.2
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post -p /sbin/ldconfig
+%gconf_schema_install gksu.schema
 
-%files -f %{name}1.2.lang
+%postun	-p /sbin/ldconfig
+%gconf_schema_uninstall gksu.schema
+
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
+%{_sysconfdir}/gconf/schemas/gksu.schemas
+%{_bindir}/gksu-properties
+%dir %{_datadir}/libgksu
+%{_datadir}/libgksu/gksu-properties.glade
+%{_desktopdir}/gksu-properties.desktop
+%{_pixmapsdir}/gksu.png
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%dir %{_libdir}/%{name}1.2
-%attr(755,root,root) %{_libdir}/%{name}1.2/gksu-run-helper
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/gksu-run-helper
 
 %files devel
 %defattr(644,root,root,755)
