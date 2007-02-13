@@ -1,5 +1,5 @@
 Summary:	libgksu library
-Summary(pl.UTF-8):   Biblioteka libgksu
+Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	1.3.8
 Release:	1
@@ -21,7 +21,7 @@ Biblioteka libgksu.
 
 %package devel
 Summary:	Header files for libgksu library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki libgksu
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgksu
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.11.3
@@ -34,7 +34,7 @@ Pliki nagłówkowe biblioteki libgksu.
 
 %package static
 Summary:	Static libgksu library
-Summary(pl.UTF-8):   Statyczna biblioteka libgksu
+Summary(pl.UTF-8):	Statyczna biblioteka libgksu
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
