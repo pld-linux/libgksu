@@ -1,16 +1,25 @@
+# TODO:
+# - descriptions for utils package
+# - check what the utils does
+#
 Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
-Version:	1.3.8
-Release:	1
+Version:	2.0.4
+Release:	0.1
 License:	LGPL
 Group:		Libraries
-Source0:	http://people.debian.org/~kov/gksu/libgksu1.2/%{name}1.2-%{version}.tar.gz
-# Source0-md5:	5c0ffa259534829cb4c5772e694282e3
+Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
+# Source0-md5:	920cc853f27c292854256fdd64db4103
 URL:		http://www.nongnu.org/gksu/
+BuildRequires:	GConf2-devel
 BuildRequires:	glib2-devel >= 1:2.11.3
+BuildRequires:	gnome-keyring-devel
 BuildRequires:	gtk-doc >= 1.6
+BuildRequires:	libglade2-devel
+BuildRequires:	libgtop-devel
 BuildRequires:	pkgconfig
+BuildRequires:	startup-notification-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,8 +53,18 @@ Static libgksu library.
 %description static -l pl.UTF-8
 Statyczna biblioteka libgksu.
 
+%package utils
+Summary:	Gksu properties utility
+Summary(pl.UTF-8):	Aplikacja w³a¶ciwo¶ci gksu
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description utils
+
+%description utils -l pl.UTF-8
+
 %prep
-%setup -q -n %{name}1.2-%{version}
+%setup -q
 
 %build
 %configure \
@@ -59,20 +78,27 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%find_lang %{name}1.2
+#%find_lang %{name}1.2
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post utils
+%gconf_schema_install
+
+%postun utils
+%gconf_schema_uninstall
+
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files -f %{name}1.2.lang
+#%files -f %{name}1.2.lang
+%files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%dir %{_libdir}/%{name}1.2
-%attr(755,root,root) %{_libdir}/%{name}1.2/gksu-run-helper
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/gksu-run-helper
 
 %files devel
 %defattr(644,root,root,755)
@@ -85,3 +111,12 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files utils
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gksu-properties
+%{_desktopdir}/gksu-properties.desktop
+%dir %{_datadir}/libgksu
+%{_datadir}/libgksu/gksu-properties.glade
+%{_pixmapsdir}/gksu.png
+%{_sysconfdir}/gconf/schemas/gksu.schemas
