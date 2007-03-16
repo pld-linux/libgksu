@@ -78,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-#%find_lang %{name}1.2
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,8 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-#%files -f %{name}1.2.lang
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
