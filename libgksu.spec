@@ -13,9 +13,11 @@ Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
 # Source0-md5:	920cc853f27c292854256fdd64db4103
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
+BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.11.3
 BuildRequires:	gnome-keyring-devel
 BuildRequires:	gtk-doc >= 1.6
+BuildRequires:	intltool
 BuildRequires:	libglade2-devel
 BuildRequires:	libgtop-devel
 BuildRequires:	pkgconfig
