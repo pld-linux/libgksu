@@ -1,5 +1,5 @@
 # TODO:
-# - descriptions for utils package
+# - real descriptions for utils package
 # - check what the utils does
 #
 Summary:	libgksu library
@@ -57,13 +57,15 @@ Statyczna biblioteka libgksu.
 
 %package utils
 Summary:	Gksu properties utility
-Summary(pl.UTF-8):	Aplikacja w�a�ciwo�ci gksu
+Summary(pl.UTF-8):	Aplikacja właściwości gksu
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
 %description utils
+Gksu properties utility.
 
 %description utils -l pl.UTF-8
+Aplikacja właściwości gksu.
 
 %prep
 %setup -q
@@ -85,14 +87,14 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %post utils
 %gconf_schema_install
 
 %postun utils
 %gconf_schema_uninstall
-
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
