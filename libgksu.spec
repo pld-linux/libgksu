@@ -6,7 +6,7 @@ Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	2.0.5
-Release:	0.1
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
