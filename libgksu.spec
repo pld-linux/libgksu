@@ -5,12 +5,12 @@
 Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
-Version:	2.0.5
-Release:	3
+Version:	2.0.9
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
-# Source0-md5:	93f61258751eb7396721281f8f784c46
+# Source0-md5:	6f3642c9096518e12e61cea551ac02d0
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	gettext-devel
@@ -82,8 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%find_lang %{name}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -96,12 +94,13 @@ rm -rf $RPM_BUILD_ROOT
 %postun utils
 %gconf_schema_uninstall
 
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/gksu-run-helper
+%attr(755,root,root) %ghost %{_libdir}/libgksu2.so.0
 
 %files devel
 %defattr(644,root,root,755)
