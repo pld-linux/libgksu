@@ -1,25 +1,24 @@
-# TODO:
-# - real descriptions for utils package
-# - check what the utils does
-#
 Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
-Version:	2.0.9
-Release:	3
-License:	LGPL
+Version:	2.0.12
+Release:	1
+License:	LGPL v2
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
-# Source0-md5:	6f3642c9096518e12e61cea551ac02d0
+# Source0-md5:	c7154c8806f791c10e7626ff123049d3
+Patch0:		%{name}-configure.patch
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
+BuildRequires:	autoconf >= 2.57
+BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.11.3
 BuildRequires:	gnome-keyring-devel
+BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	intltool
-BuildRequires:	libglade2-devel
 BuildRequires:	libgtop-devel
+BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -35,7 +34,10 @@ Summary:	Header files for libgksu library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgksu
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.11.3
+Requires:	GConf2-devel
+Requires:	glib2-devel >= 1:2.12.0
+Requires:	gnome-keyring-devel
+Requires:	startup-notification-devel
 
 %description devel
 Header files for libgksu library.
@@ -55,22 +57,45 @@ Static libgksu library.
 %description static -l pl.UTF-8
 Statyczna biblioteka libgksu.
 
+%package apidocs
+Summary:	libgksu library API documentation
+Summary(pl.UTF-8):	Dokumentacja API biblioteki libgksu
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+libgksu library API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki libgksu.
+
 %package utils
-Summary:	Gksu properties utility
-Summary(pl.UTF-8):	Aplikacja właściwości gksu
+Summary:	GKSu properties utility
+Summary(pl.UTF-8):	Aplikacja właściwości GKSu
 Group:		X11/Applications
+Requires(post,preun):	GConf2
 Requires:	%{name} = %{version}-%{release}
 
 %description utils
-Gksu properties utility.
+This program allows you to define how GKSu grants the privileges and
+locks input devices.
 
 %description utils -l pl.UTF-8
-Aplikacja właściwości gksu.
+Ten program pozwala zdefiniować jak GKSu przyznaje uprawnienia i
+blokuje urządzenia wejściowe.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__gtkdocize} --docdir docs/
+%{__intltoolize}
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
@@ -82,6 +107,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%find_lang libgksu
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -89,36 +116,40 @@ rm -rf $RPM_BUILD_ROOT
 %postun	-p /sbin/ldconfig
 
 %post utils
-%gconf_schema_install
+%gconf_schema_install gksu.schemas
 
-%postun utils
-%gconf_schema_uninstall
+%preun utils
+%gconf_schema_uninstall gksu.schemas
 
-%files
+%files -f libgksu.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/gksu-run-helper
+%attr(755,root,root) %{_libdir}/libgksu2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgksu2.so.0
+%dir %{_libdir}/libgksu
+%attr(755,root,root) %{_libdir}/libgksu/gksu-run-helper
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/%{name}*
-%{_pkgconfigdir}/*.pc
-%{_gtkdocdir}/%{name}*
+%attr(755,root,root) %{_libdir}/libgksu2.so
+%{_libdir}/libgksu2.la
+%{_includedir}/libgksu
+%{_pkgconfigdir}/libgksu2.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libgksu2.a
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/libgksu
 
 %files utils
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gksu-properties
 %{_desktopdir}/gksu-properties.desktop
 %dir %{_datadir}/libgksu
-%{_datadir}/libgksu/gksu-properties.glade
+%{_datadir}/libgksu/gksu-properties.ui
+%{_mandir}/man1/gksu-properties.1*
 %{_pixmapsdir}/gksu.png
 %{_sysconfdir}/gconf/schemas/gksu.schemas
