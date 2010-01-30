@@ -12,6 +12,7 @@ URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-keyring-devel
 BuildRequires:	gtk+2-devel >= 2:2.12.0
