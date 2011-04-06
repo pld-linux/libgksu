@@ -2,7 +2,7 @@ Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	2.0.12
-Release:	2
+Release:	3
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
@@ -110,6 +110,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgksu2.la
+
 %find_lang libgksu
 
 %clean
@@ -135,7 +137,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgksu2.so
-%{_libdir}/libgksu2.la
 %{_includedir}/libgksu
 %{_pkgconfigdir}/libgksu2.pc
 
