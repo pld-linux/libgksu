@@ -2,13 +2,14 @@ Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	2.0.12
-Release:	3
+Release:	4
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
 # Source0-md5:	c7154c8806f791c10e7626ff123049d3
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-helper.patch
+Patch2:		am.patch
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
@@ -90,6 +91,7 @@ blokuje urządzenia wejściowe.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__gtkdocize} --docdir docs/

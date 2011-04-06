@@ -1,0 +1,19 @@
+--- libgksu-2.0.12/Makefile.am.wiget	2011-04-06 16:01:23.513871744 +0200
++++ libgksu-2.0.12/Makefile.am	2011-04-06 16:02:08.445646800 +0200
+@@ -17,11 +17,11 @@ EXTRA_DIST = config.rpath mkinstalldirs
+ 
+ if GCONF_SCHEMAS_INSTALL
+ install-data-local:
+-        if test -z "$(DESTDIR)" ; then \
+-          for p in $(schemas_DATA) ; do \
+-            GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$$p ; \
+-          done \
+-        fi
++	if test -z "$(DESTDIR)" ; then \
++		for p in $(schemas_DATA) ; do \
++			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$$p ; \
++		done \
++	fi
+ else
+ install-data-local:
+ endif
