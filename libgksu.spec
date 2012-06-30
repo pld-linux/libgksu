@@ -2,7 +2,7 @@ Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	2.0.12
-Release:	5
+Release:	6
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
@@ -40,7 +40,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	GConf2-devel
 Requires:	glib2-devel >= 1:2.12.0
-Requires:	gnome-keyring-devel
+Requires:	libgnome-keyring-devel
 Requires:	startup-notification-devel
 
 %description devel
