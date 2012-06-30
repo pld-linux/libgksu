@@ -2,7 +2,7 @@ Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	2.0.12
-Release:	4
+Release:	5
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
@@ -10,16 +10,17 @@ Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-helper.patch
 Patch2:		am.patch
+Patch3:		automake-1.11.patch
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-keyring-devel
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	intltool
+BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libgtop-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -92,6 +93,7 @@ blokuje urządzenia wejściowe.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__gtkdocize} --docdir docs/
