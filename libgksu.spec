@@ -11,6 +11,7 @@ Patch0:		%{name}-configure.patch
 Patch1:		%{name}-helper.patch
 Patch2:		am.patch
 Patch3:		automake-1.11.patch
+Patch4:		format-security.patch
 URL:		http://www.nongnu.org/gksu/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.57
@@ -94,6 +95,7 @@ blokuje urządzenia wejściowe.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__gtkdocize} --docdir docs/
