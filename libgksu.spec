@@ -2,7 +2,7 @@ Summary:	libgksu library
 Summary(pl.UTF-8):	Biblioteka libgksu
 Name:		libgksu
 Version:	2.0.12
-Release:	8
+Release:	9
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://people.debian.org/~kov/gksu/%{name}-%{version}.tar.gz
@@ -67,6 +67,9 @@ Summary:	libgksu library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libgksu
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 libgksu library API documentation.
