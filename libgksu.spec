@@ -25,6 +25,7 @@ BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libgtop-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	startup-notification-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
